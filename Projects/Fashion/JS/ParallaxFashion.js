@@ -154,6 +154,35 @@ $(document).ready(function() {
 
   });
 
+  $('.nav-item a').click(function(){
+    $('.nav-item a').removeClass('active');
+    $(this).addClass('active');
+  });
+
+  $(document).on("scroll", onScroll);
+  function onScroll(event){
+    var scrollPos = $(document).scrollTop() + 120;
+    $('.nav-item a').each(function () {
+      var navItem = $(".nav-item");
+        var currLink = $(this);
+        var refElement = $(currLink.attr("href"));
+        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+            $('.nav-item').removeClass("active"); //added to remove active class from all a elements
+            currLink.addClass("active");
+        }
+        else{
+          currLink.removeClass("active");
+        }
+    });
+  }
+  
+
+  $('.back-to-top').click(function() {
+    $('html, body').animate({
+      scrollTop: 0
+    }, 1500, 'easeInOutExpo');
+    return false;
+  });
 
 });
 
